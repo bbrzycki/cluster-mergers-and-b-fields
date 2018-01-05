@@ -15,5 +15,6 @@ ts = yt.DatasetSeries(data_fns)
 for ds in ts:
     print("Creating scene",str(ds)[-4:])
     sc = yt.create_scene(ds)
+    sc.camera.zoom(3.0)
     sc.save('RENDERED_IMAGES/%s.png' % str(ds), sigma_clip=8)
     print("Finishing image",str(ds)[-4:])
