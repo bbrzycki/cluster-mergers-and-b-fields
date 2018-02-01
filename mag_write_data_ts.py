@@ -29,7 +29,7 @@ except OSError as e:
         
 # sim_names_mag=['1to1_b0','1to1_b0.5','1to1_b1',
 #                '1to3_b0','1to3_b0.5','1to3_b1','1to10_b0']
-sim_names_mag=['1to3_b1']
+sim_names_mag=['1to10_b0.5','1to10_b1']
 
 # do all time series
 for sim_name in sim_names_mag:

@@ -5,7 +5,7 @@ from yt.visualization.volume_rendering.api import Scene, VolumeSource
 import glob
 
 
-full_path_header="/data/mimir/jzuhone/data/fid_mag/1to1_b0/fiducial_1to1_b0_mag_hdf5_plt_cnt_"
+full_path_header="/data/mimir/jzuhone/data/fid_mag/1to3_b1/fiducial_1to3_b1_hdf5_plt_cnt_"
 
 data_fns = glob.glob(full_path_header + "0[0-9][0-9][05]")
 # Sort them
