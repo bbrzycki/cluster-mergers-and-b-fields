@@ -28,8 +28,9 @@ except OSError as e:
 # ds_fn_head_mag="fiducial_%s_mag_hdf5_plt_cnt_" % SIM_TYPE
 
 sim_names_no_mag=['1to1_b0','1to1_b0.5','1to1_b1',
-                 '1to3_b0','1to3_b0.5','1to3_b1']
-# sim_names_no_mag=['1to3_b0.5','1to3_b1']
+                  '1to3_b0','1to3_b0.5','1to3_b1',
+                  '1to10_b0','1to10_b0.5','1to10_b1']
+#sim_names_no_mag=['1to10_b0', '1to10_b0.5','1to10_b1']
         
 # profiles
 for sim_name in sim_names_no_mag:
@@ -41,5 +42,6 @@ for sim_name in sim_names_no_mag:
     
     # make and write profiles
     p=nmwdf.create_profiles(ds0500, field_list_p)
-    nmwdf.write_profiles("%s_no_mag.hdf5"%sim_name, "profiles_0500_80b", p, field_list_p)
+    nmwdf.write_profiles("%s_no_mag.hdf5"%sim_name, "profiles_0500_gpot", p, field_list_p)
+    #nmwdf.write_profiles("%s_no_mag.hdf5"%sim_name, "profiles_0500_80b", p, field_list_p)
    

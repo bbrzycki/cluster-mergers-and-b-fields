@@ -28,15 +28,14 @@ except OSError as e:
 # ds_fn_head_mag="fiducial_%s_mag_hdf5_plt_cnt_" % SIM_TYPE
         
 sim_names_mag=['1to1_b0','1to1_b0.5','1to1_b1',
-              '1to3_b0','1to3_b0.5','1to3_b1','1to10_b0']
-# sim_names_mag=['1to3_b1']
+               '1to3_b0','1to3_b0.5','1to3_b1',
+               '1to10_b0','1to10_b0.5','1to10_b1']
+# sim_names_mag=['1to10_b0.5','1to10_b1']
 
 # do all profiles
 for sim_name in sim_names_mag:
-    if sim_name[:4]=='1to3':
-        ds_fn_head_mag="fiducial_%s_hdf5_plt_cnt_" % sim_name
-    else:
-        ds_fn_head_mag="fiducial_%s_mag_hdf5_plt_cnt_" % sim_name
+    
+    ds_fn_head_mag="fiducial_%s_mag_hdf5_plt_cnt_" % sim_name
     full_path_header=DATA_DIR+"fid_mag/"+sim_name+"/"+ds_fn_head_mag
     
     
@@ -49,11 +48,13 @@ for sim_name in sim_names_mag:
         # this simulation doesn't go out to 0500
         ds0450 = m.yt.load(full_path_header+"0450")
         p=mwdf.create_profiles(ds0450, field_list_p)
-        mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0450_80b", p, field_list_p)
+        mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0450_gpot", p, field_list_p)
+        #mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0450_80b", p, field_list_p)
     else:
         ds0500 = m.yt.load(full_path_header+"0500")
         p=mwdf.create_profiles(ds0500, field_list_p)
-        mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0500_80b", p, field_list_p)
+        mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0500_gpot", p, field_list_p)
+        #mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0500_80b", p, field_list_p)
     
     #p0250=mwdf.create_profiles(ds0250,field_list_p)
     #mwdf.write_profiles("%s_mag.hdf5"%sim_name,"profiles_0250",p0250,field_list_p)

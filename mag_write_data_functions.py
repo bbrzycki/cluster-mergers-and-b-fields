@@ -5,45 +5,45 @@ import mag_initialize as m
 def create_profiles(ds, field_list):
     print('Finding gravitational potential minimum')
     # Find the gravitational potential minimum
+    v, c = ds.find_min("gpot")
     
     #####
-    # Get all the data
-    dd = ds.all_data()
+#     # Get all the data
+#     dd = ds.all_data()
 
-    # Find the mean velocity of halo 1's particles
-    logic = dd["particle_halo"].astype("int") == 1
+#     # Find the mean velocity of halo 1's particles
+#     logic = dd["particle_halo"].astype("int") == 1
 
-    pvx = (dd["particle_velocity_x"]*logic).mean()
-    pvy = (dd["particle_velocity_y"]*logic).mean()
-    pvz = (dd["particle_velocity_z"]*logic).mean()
+#     pvx = (dd["particle_velocity_x"]*logic).mean()
+#     pvy = (dd["particle_velocity_y"]*logic).mean()
+#     pvz = (dd["particle_velocity_z"]*logic).mean()
 
-    # We use ds.arr to compute a YTArray from this because we need 
-    # code_length that only ds knows about
-    pv = ds.arr([pvx, pvy, pvz])
+#     # We use ds.arr to compute a YTArray from this because we need 
+#     # code_length that only ds knows about
+#     pv = ds.arr([pvx, pvy, pvz])
 
-    # Set the field parameter "bulk_velocity" to the mean of all 
-    # halo 1's particles
-    dd.set_field_parameter("bulk_velocity", pv)
+#     # Set the field parameter "bulk_velocity" to the mean of all 
+#     # halo 1's particles
+#     dd.set_field_parameter("bulk_velocity", pv)
     
-    # This gives you the center
-    #c = dd.argmin(('io','particle_ener'))
+#     # This gives you the center
+#     #c = dd.argmin(('io','particle_ener'))
     
-    idx = m.np.argmin(dd['io','particle_ener'])
-    c = dd["particle_position"][idx]
+#     idx = m.np.argmin(dd['io','particle_ener'])
+#     c = dd["particle_position"][idx]
     
-    # Should reset bulk_velocity to zero now
-    dd.set_field_parameter("bulk_velocity", ds.arr([0.0, 0.0, 0.0], "code_length"))
+#     # Should reset bulk_velocity to zero now
+#     dd.set_field_parameter("bulk_velocity", ds.arr([0.0, 0.0, 0.0], "code_length"))
     #####
     
-    #v, c = ds.find_min("gpot")
-    # dark matter particle prescription
+    # dark matter particle prescription, first iteration (deprecated)
     # v, c = ds.find_min(('io','particle_gpot2'))
 
     # Make a sphere at this point
     sp = ds.sphere(c, (2.0, "Mpc"))
 
     print('Creating profiles')
-    p = m.yt.create_profile(sp, "radius", field_list, n_bins=80)
+    p = m.yt.create_profile(sp, "radius", field_list, n_bins=100)
     
     print('Finished creating profiles')
     return p

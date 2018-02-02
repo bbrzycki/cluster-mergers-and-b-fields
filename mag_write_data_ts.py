@@ -33,10 +33,7 @@ sim_names_mag=['1to10_b0.5','1to10_b1']
 
 # do all time series
 for sim_name in sim_names_mag:
-    if sim_name[:4]=='1to3':
-        ds_fn_head_mag="fiducial_%s_hdf5_plt_cnt_" % sim_name
-    else:
-        ds_fn_head_mag="fiducial_%s_mag_hdf5_plt_cnt_" % sim_name
+    ds_fn_head_mag="fiducial_%s_mag_hdf5_plt_cnt_" % sim_name
     full_path_header=DATA_DIR+"fid_mag/"+sim_name+"/"+ds_fn_head_mag    
     
     data_fns = m.glob.glob(full_path_header + "0[0-9][0-9][05]")
