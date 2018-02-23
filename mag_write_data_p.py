@@ -44,23 +44,21 @@ for sim_name in sim_names_mag:
     #ds0400 = m.yt.load(full_path_header+"0400")
     field_list_p = ["kT","density","density_total","velocity_spherical_radius", "velocity_spherical_theta", "velocity_spherical_phi", "magnetic_field_spherical_radius", "magnetic_field_spherical_theta", "magnetic_field_spherical_phi"]
     
-    if sim_name=='1to3_b1':
-        # this simulation doesn't go out to 0500
-        ds0450 = m.yt.load(full_path_header+"0450")
-        p=mwdf.create_profiles(ds0450, field_list_p)
-        mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0450_gpot", p, field_list_p)
-        #mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0450_80b", p, field_list_p)
-    else:
-        ds0500 = m.yt.load(full_path_header+"0500")
-        p=mwdf.create_profiles(ds0500, field_list_p)
-        mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0500_gpot", p, field_list_p)
-        #mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0500_80b", p, field_list_p)
-    
-    #p0250=mwdf.create_profiles(ds0250,field_list_p)
-    #mwdf.write_profiles("%s_mag.hdf5"%sim_name,"profiles_0250",p0250,field_list_p)
-    #p0400=mwdf.create_profiles(ds0400,field_list_p)
-    #mwdf.write_profiles("%s_mag.hdf5"%sim_name,"profiles_0400",p0400,field_list_p)
-    
-
-    # make and write profiles
-    
+    # # MAKING FINAL STATE PROFILES
+    # # profiles_0250, profiles_0250_gpot, profiles_0250_gpot_afterfix, "profiles_0250_80b"
+    # if sim_name=='1to3_b1':
+    #     # this simulation doesn't go out to 0500
+    #     ds0450 = m.yt.load(full_path_header+"0450")
+    #     p=mwdf.create_profiles(ds0450, field_list_p)
+    #     mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0450_gpot_afterfix", p, field_list_p)
+    #     #mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0450_80b", p, field_list_p)
+    # else:
+    #     ds0500 = m.yt.load(full_path_header+"0500")
+    #     p=mwdf.create_profiles(ds0500, field_list_p)
+    #     mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0500_gpot_afterfix", p, field_list_p)
+    #     #mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0500_80b", p, field_list_p)
+        
+    # MAKING INITIAL STATE PROFILES
+    ds0000 = m.yt.load(full_path_header+"0000")
+    p=mwdf.create_profiles(ds0000, field_list_p)
+    mwdf.write_profiles("%s_mag.hdf5"%sim_name, "profiles_0000_gpot_afterfix", p, field_list_p)

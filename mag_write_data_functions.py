@@ -1,5 +1,25 @@
 # bunch of functions to write data to file
 import mag_initialize as m
+import numpy as np
+
+def find_center(ds1):
+    print('Finding gravitational potential minimum')
+    # Find the gravitational potential minimum                                                                                                   
+    #####                                                                                                                                        
+    # Get all the data                    
+    dd = ds1.all_data()
+
+    # Find the halo's particles                                                                                                                                
+    print(1)
+    print(dd["io","particle_halo"][:10])
+    logic = dd["io","particle_halo"].astype("int") == 1
+    print(2)
+    idx = np.argsort(dd['io','particle_gpot']*logic)[:100]
+    print(3)
+    c = dd["io","particle_position"][idx,:].mean(axis=0)
+    print(4)
+    
+    return c
 
 # returns profile object
 def create_profiles(ds, field_list):
@@ -80,37 +100,57 @@ def create_total_box_time_series(ts, field_list, k):
             # list_total=[]
             quan_list=[]
             
-            #####
-            # Get all the data
+#             #####
+#             # Get all the data
+#             dd = ds.all_data()
+
+#             # Find the mean velocity of halo 1's particles
+#             logic = dd["particle_halo"].astype("int") == 1
+            
+
+#             pvx = (dd["particle_velocity_x"]*logic).mean()
+#             pvy = (dd["particle_velocity_y"]*logic).mean()
+#             pvz = (dd["particle_velocity_z"]*logic).mean()
+
+#             # We use ds.arr to compute a YTArray from this because we need 
+#             # code_length that only ds knows about
+#             pv = ds.arr([pvx, pvy, pvz])
+
+#             # Set the field parameter "bulk_velocity" to the mean of all 
+#             # halo 1's particles
+#             dd.set_field_parameter("bulk_velocity", pv)
+            
+#             # This gives you the center
+#             #c = dd.argmin(('io','particle_ener'))
+            
+#             idx = m.np.argmin(dd['io','particle_ener'])
+#             c = dd["particle_position"][idx]
+            
+
+#             # Should reset bulk_velocity to zero now
+#             dd.set_field_parameter("bulk_velocity", ds.arr([0.0, 0.0, 0.0], "code_length"))
+#             #####
+
+#             dd = ds.all_data()
+
+#             # Find the halo's particles         
+#             print(1)
+#             print(dd["particle_halo"][:10])
+#             logic = dd["particle_halo"].astype("int") == 1
+#             print(2)
+#             idx = np.argsort(dd['io','particle_gpot']*logic)[:100]
+#             print(3)
+#             c = dd['particle_position'][idx,:].mean(axis=0)
+#             print(4)
+            
             dd = ds.all_data()
-
-            # Find the mean velocity of halo 1's particles
-            logic = dd["particle_halo"].astype("int") == 1
+            logic = dd["io","particle_halo"].astype("int") == 1
+            idx = np.argsort(dd['io','particle_gpot']*logic)[:100]
+            #print(idx)
+            c = dd['particle_position'][idx,:].mean(axis=0)
             
-
-            pvx = (dd["particle_velocity_x"]*logic).mean()
-            pvy = (dd["particle_velocity_y"]*logic).mean()
-            pvz = (dd["particle_velocity_z"]*logic).mean()
-
-            # We use ds.arr to compute a YTArray from this because we need 
-            # code_length that only ds knows about
-            pv = ds.arr([pvx, pvy, pvz])
-
-            # Set the field parameter "bulk_velocity" to the mean of all 
-            # halo 1's particles
-            dd.set_field_parameter("bulk_velocity", pv)
-            
-            # This gives you the center
-            #c = dd.argmin(('io','particle_ener'))
-            
-            idx = m.np.argmin(dd['io','particle_ener'])
-            c = dd["particle_position"][idx]
-            
-
-            # Should reset bulk_velocity to zero now
-            dd.set_field_parameter("bulk_velocity", ds.arr([0.0, 0.0, 0.0], "code_length"))
-            #####
-            
+            # c = find_center(ds)
+            # print(c,"test")
             
             #ad = ds.all_data()
             #v, c = ds.find_min("gpot")

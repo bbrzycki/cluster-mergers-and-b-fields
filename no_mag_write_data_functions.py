@@ -1,5 +1,21 @@
 # bunch of functions to write data to file
 import no_mag_initialize as nm
+import numpy as np
+
+def find_center(ds, halo=1):
+    print('Finding gravitational potential minimum')
+    # Find the gravitational potential minimum                                                                                                                                                                                                             
+    #####                                                                                                                                                                                                                                                  
+    # Get all the data                                                                                                                                                                                                                                     
+    dd = ds.all_data()
+
+    # Find the halo's particles                                                                                                                                                                                                         
+    logic = dd["particle_halo"].astype("int") == halo
+
+    idx = np.argsort(dd['io','particle_gpot']*logic)[:100]
+    c = dd["particle_position"][idx,:].mean(axis=0)
+    
+    return c
 
 # returns profile object
 def create_profiles(ds, field_list):
@@ -76,34 +92,42 @@ def create_total_box_time_series(ts, field_list, k):
             # list_total=[]
             quan_list=[]
             
-            #####
-            # Get all the data
-            dd = ds.all_data()
+#             #####
+#             # Get all the data
+#             dd = ds.all_data()
 
-            # Find the mean velocity of halo 1's particles
-            logic = dd["particle_halo"].astype("int") == 1
+#             # Find the mean velocity of halo 1's particles
+#             logic = dd["particle_halo"].astype("int") == 1
 
-            pvx = (dd["particle_velocity_x"]*logic).mean()
-            pvy = (dd["particle_velocity_y"]*logic).mean()
-            pvz = (dd["particle_velocity_z"]*logic).mean()
+#             pvx = (dd["particle_velocity_x"]*logic).mean()
+#             pvy = (dd["particle_velocity_y"]*logic).mean()
+#             pvz = (dd["particle_velocity_z"]*logic).mean()
 
-            # We use ds.arr to compute a YTArray from this because we need 
-            # code_length that only ds knows about
-            pv = ds.arr([pvx, pvy, pvz])
+#             # We use ds.arr to compute a YTArray from this because we need 
+#             # code_length that only ds knows about
+#             pv = ds.arr([pvx, pvy, pvz])
 
-            # Set the field parameter "bulk_velocity" to the mean of all 
-            # halo 1's particles
-            dd.set_field_parameter("bulk_velocity", pv)
+#             # Set the field parameter "bulk_velocity" to the mean of all 
+#             # halo 1's particles
+#             dd.set_field_parameter("bulk_velocity", pv)
 
-            # This gives you the center
-            #c = dd.argmin(('io','particle_ener'))
+#             # This gives you the center
+#             #c = dd.argmin(('io','particle_ener'))
             
-            idx = nm.np.argmin(dd['io','particle_ener'])
-            c = dd["particle_position"][idx]
+#             idx = nm.np.argmin(dd['io','particle_ener'])
+#             c = dd["particle_position"][idx]
 
-            # Should reset bulk_velocity to zero now
-            dd.set_field_parameter("bulk_velocity", ds.arr([0.0, 0.0, 0.0], "code_length"))
-            #####
+#             # Should reset bulk_velocity to zero now
+#             dd.set_field_parameter("bulk_velocity", ds.arr([0.0, 0.0, 0.0], "code_length"))
+#             #####
+            
+            dd = ds.all_data()
+            logic = dd["io","particle_halo"].astype("int") == 1
+            idx = np.argsort(dd['io','particle_gpot']*logic)[:100]
+            #print(idx)
+            c = dd['particle_position'][idx,:].mean(axis=0)
+            
+            # c = find_center(ds)
             
             #ad = ds.all_data()
             #v, c = ds.find_min("gpot")

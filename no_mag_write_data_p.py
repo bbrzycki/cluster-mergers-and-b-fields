@@ -42,6 +42,6 @@ for sim_name in sim_names_no_mag:
     
     # make and write profiles
     p=nmwdf.create_profiles(ds0500, field_list_p)
-    nmwdf.write_profiles("%s_no_mag.hdf5"%sim_name, "profiles_0500_gpot", p, field_list_p)
+    nmwdf.write_profiles("%s_no_mag.hdf5"%sim_name, "profiles_0500_gpot_afterfix", p, field_list_p)
     #nmwdf.write_profiles("%s_no_mag.hdf5"%sim_name, "profiles_0500_80b", p, field_list_p)
    

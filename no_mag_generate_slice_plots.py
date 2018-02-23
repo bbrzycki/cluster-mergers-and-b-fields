@@ -111,10 +111,11 @@ DATA_DIR = "/data/mimir/jzuhone/data/"
 # ds_fn_head_mag="fiducial_%s_mag_hdf5_plt_cnt_" % SIM_TYPE
         
 sim_names_no_mag=['1to1_b0','1to1_b0.5','1to1_b1',
-               '1to3_b0','1to3_b0.5','1to3_b1']
+                  '1to3_b0','1to3_b0.5','1to3_b1',
+                  '1to10_b0','1to10_b0.5','1to10_b1']
 #sim_names_no_mag=['1to1_b0']
-#slice_fields = ["density","kT","entropy"]
-slice_fields = ["entropy"]
+slice_fields = ["density","kT","entropy"]
+#slice_fields = ["entropy"]
 
 # do all time series
 for sim_name in sim_names_no_mag:
@@ -130,11 +131,19 @@ for sim_name in sim_names_no_mag:
     for field in slice_fields:
         try:
             #os.makedirs(IMG_DIR+"slice_plots/"+field+"_6Mpc_dybo")
-            os.makedirs(IMG_DIR+"slice_plots/"+field+"_6Mpc")
+            os.makedirs(IMG_DIR+"full_slice_plots/"+field+"_8Mpc")
             #os.makedirs(IMG_DIR+"slice_plots/"+field)
         except OSError as e:
             if e.errno != errno.EEXIST:
                 raise
+                
+    try:
+        #os.makedirs(IMG_DIR+"slice_plots/"+field+"_6Mpc_dybo")
+        os.makedirs(IMG_DIR+"full_slice_plots/"+"all_cic"+"_8Mpc")
+        #os.makedirs(IMG_DIR+"slice_plots/"+field)
+    except OSError as e:
+        if e.errno != errno.EEXIST:
+            raise
     
     ds_fn_head_no_mag="fiducial_%s_hdf5_plt_cnt_" % sim_name
     full_path_header=DATA_DIR+"fid/"+sim_name+"/"+ds_fn_head_no_mag
@@ -147,38 +156,48 @@ for sim_name in sim_names_no_mag:
     # Get a collection of datasets to iterate over
     ts = yt.DatasetSeries(data_fns)
     axis="z"
+    
+    # find gpot min of final timestep
+    ds_final = yt.load(data_fns[-1])
+    v, c = ds_final.find_min("gpot")
 
     # Now loop over the datasets
     for ds in ts:
         for field in slice_fields:
             #fn = IMG_DIR+"slice_plots/"+field+"_6Mpc_dybo"+"/"+str(ds)+"_Slice_"+axis+"_"+field+".png"
-            fn = IMG_DIR+"slice_plots/"+field+"_6Mpc"+"/"+str(ds)+"_Slice_"+axis+"_"+field+".png"
+            fn = IMG_DIR+"slice_plots/"+field+"_8Mpc"+"/"+str(ds)+"_Slice_"+axis+"_"+field+".png"
             #fn = IMG_DIR+"slice_plots/"+field+"/"+str(ds)+"_Slice_"+axis+"_"+field+".png"
             #print("STARTSTARTSTART")
             if not os.path.exists(fn):
                 #print("NONONONONONOONO")
-                slc = yt.SlicePlot(ds, axis, field, width = (6,'Mpc'), center=("min","gpot"))
+                slc = yt.SlicePlot(ds, axis, field, width = (8,'Mpc'), center = c)
                 #slc = yt.SlicePlot(ds, axis, field)
                 
-                # if field=="density":
-                #     zlim1=1e-30
-                #     zlim2=1e-25
-                # elif field=="kT":
-                #     zlim1=1e-1
-                #     zlim2=1e2
-                # elif field=="magnetic_field_strength":
-                #    zlim1=1e-10
-                #    zlim2=1e-5
-                # else:
-                #     print("Welp, that failed. No %s field found." % field)
-                #     #sys.exit()
-                # slc.set_zlim(field,zlim1,zlim2)
+                if field=="entropy":
+                    zlim1=1e1
+                    zlim2=1e5
+                if field=="density":
+                    zlim1=1e-30
+                    zlim2=1e-25
+                elif field=="kT":
+                    zlim1=1e-1
+                    zlim2=1e2
+                else:
+                    print("Welp, that failed. No %s field found." % field)
+                    #sys.exit()
+                slc.set_zlim(field,zlim1,zlim2)
                 
                 slc.annotate_timestamp(redshift=False,draw_inset_box=True)
                 #slc.save(IMG_DIR+"slice_plots/"+field+"_6Mpc_dybo")
-                slc.save(IMG_DIR+"slice_plots/"+field+"_6Mpc")
+                slc.save(IMG_DIR+"full_slice_plots/"+field+"_8Mpc")
                 #slc.save(IMG_DIR+"slice_plots/"+field)
                 print("%s %s saved" % (ds,field))
+                
+        # for particle density
+        slc = yt.SlicePlot(ds, axis, [('deposit', 'all_cic')], width = (8,'Mpc'), center = c)
+        slc.annotate_timestamp(redshift=False,draw_inset_box=True)
+        slc.save(IMG_DIR+"full_slice_plots/"+"all_cic"+"_8Mpc")
+        print("%s %s saved" % (ds,field))
 
     print("Ended slice images of density, kT, and magnetic field strength")
 
