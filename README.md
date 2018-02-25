@@ -20,3 +20,18 @@ cluster-mergers-and-b-fields/
     slice-plots/
     movies/
 ```
+
+TO DO:
+
+mag vs no-mag
+methods and functions that apply to both mag and no-mag, and then others for mag
+
+slice plots
+    should be able to make movies from these
+energy vs time
+radial profiles at final timestep
+    at initial
+    potentially at each timestep???
+
+i want a method to look inside hdf5, i.e. if i import it interactively
+i.e. list all the profiles or timesteps that live within it already
