@@ -51,9 +51,10 @@ def find_center(ds,
     return c
 
 # returns profile object
+# R in kpc
 def generate_profiles(ds,
                       field_list,
-                      R = ds.quan(2.0,'Mpc'),
+                      R = 2000,
                       n_bins = 100,
                       center_method = 'gpot'):
     print('Finding gravitational potential minimum')
@@ -61,7 +62,7 @@ def generate_profiles(ds,
     c = find_center(ds, center_method)
 
     # Make a sphere at this point
-    sp = ds.sphere(c, R)
+    sp = ds.sphere(c, ds.quan(R, 'kpc'))
 
     print('Creating profiles')
     p = yt.create_profile(sp, 'radius', field_list, n_bins=n_bins)
@@ -104,7 +105,7 @@ def make_profiles(ds_path,
     profile = generate_profiles(ds,
                                 field_list,
                                 center_method = center_method,
-                                R = ds.quan(R,'kpc'),
+                                R = ds.quan(R, 'kpc'),
                                 n_bins = n_bins)
     write_profiles_to_hdf5(hdf5_directory + '/' + hdf5_filename,
                            hdf5_groupname,
