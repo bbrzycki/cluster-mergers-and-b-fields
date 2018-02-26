@@ -25,7 +25,7 @@ def list_groups(filename):
 
 def get_fields(filename,groupname):
     f = h5py.File(filename,'r')
-    fields = f[groupname]
+    fields = f[groupname].keys()
     f.close()
     return fields
 
