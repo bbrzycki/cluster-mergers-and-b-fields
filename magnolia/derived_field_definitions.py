@@ -91,10 +91,10 @@ def _gravitational_potential_energy_total(field, data):
     return data['gravitational_potential_energy1'] + data['gravitational_potential_energy2']
 yt.add_field(('gas','gravitational_potential_energy_total'), function=_gravitational_potential_energy_total, units='erg')
 
-def _particle_gpot2(field, data):
+def _particle_gpot_halo1(field, data):
     logic = data['io','particle_halo'] == 1.
     return data['io','particle_gpot']*logic
-yt.add_field(('io', 'particle_gpot2'), function=_particle_gpot2, units='dimensionless',particle_type=True,force_override=True)
+yt.add_field(('io', 'particle_gpot_halo1'), function=_particle_gpot_halo1, units='dimensionless',particle_type=True,force_override=True)
 
 def _particle_ener(field, data):
     # '.d' drops the units in the next line because particle_gpot is unitless
