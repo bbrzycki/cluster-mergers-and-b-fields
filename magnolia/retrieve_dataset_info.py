@@ -19,15 +19,27 @@ def get_groups(filename):
     f.close()
     return groups
 
-def list_groups(filename):
-    print(get_groups(filename))
-    return
-
 def get_fields(filename,groupname):
     f = h5py.File(filename,'r')
     fields = list(f[groupname].keys())
     f.close()
     return fields
+
+def remove_group(filename,groupname):
+    f = h5py.File(filename,'w')
+    del f[groupname]
+    f.close()
+    return
+
+def remove_field(filename,groupname,field):
+    f = h5py.File(filename,'w')
+    del f[groupname][field]
+    f.close()
+    return
+
+def list_groups(filename):
+    print(get_groups(filename))
+    return
 
 def list_fields(filename,groupname):
     print(get_fields(filename,groupname))
