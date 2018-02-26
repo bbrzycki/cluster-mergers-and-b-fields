@@ -34,12 +34,10 @@ def list_fields(filename,groupname):
     return
 
 def list_all_fields(filename):
-    f = h5py.File(filename,'r')
-    for groupname in f.keys():
+    for groupname in get_groups(filename):
         print(groupname)
         for field in get_fields(filename,groupname):
             print("-- " + field)
-    f.close()
     return
 
 # field is a string
