@@ -1,4 +1,10 @@
-# bunch of functions to write data to file
+"""
+Series of functions to store information within HDF5 files as YTArrays,
+chiefly profile and energy over time data. Includes functions to create
+profiles for desired fields and sum up energy contributions over different
+shapes (sphere or entire simulation box).
+"""
+
 import os
 import sys
 import glob

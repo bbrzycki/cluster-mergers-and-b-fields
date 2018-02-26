@@ -1,3 +1,8 @@
+"""
+Series of functions to retrieve information stored within HDF5 files,
+chiefly profile and energy over time data stored as YTArrays.
+"""
+
 import yt
 from yt.units import kboltz, mp
 import numpy as np
@@ -8,18 +13,18 @@ mu_e = 1.14
 gamma = 5/3
 
 # gets untis from YTArray
-def get_units(L):
-    temp_str = str(L[-1:])
+def get_units(field_array):
+    temp_str = str(field_array[-1:])
     k = temp_str.rfind("]") + 2
     return temp_str[k:]
 
-def get_groups(filename):
+def get_groupnames(filename):
     f = h5py.File(filename,'r')
     groups = list(f.keys())
     f.close()
     return groups
 
-def get_fields(filename,groupname):
+def get_fieldnames(filename,groupname):
     f = h5py.File(filename,'r')
     fields = list(f[groupname].keys())
     f.close()
@@ -38,17 +43,17 @@ def remove_field(filename,groupname,field):
     return
 
 def list_groups(filename):
-    print(get_groups(filename))
+    print(get_groupnames(filename))
     return
 
-def list_fields(filename,groupname):
-    print(get_fields(filename,groupname))
+def list_fieldnames(filename,groupname):
+    print(get_fieldnames(filename,groupname))
     return
 
-def list_all_fields(filename):
-    for groupname in get_groups(filename):
+def list_all_fieldnames(filename):
+    for groupname in get_groupnames(filename):
         print(groupname)
-        for field in get_fields(filename,groupname):
+        for field in get_fieldnames(filename,groupname):
             print("-- " + field)
     return
 
@@ -129,6 +134,8 @@ def n_e(filename,groupname):
 def entropy(filename,groupname):
     return kT(filename,groupname)/(n_e(filename,groupname))**(2/3)
 
+
+# for energy over time
 def get_mass(filename,groupname):
     M=yt.YTArray.from_hdf5(filename, dataset_name="/%s/mass"%groupname).in_units('Msun')
     return M
@@ -145,6 +152,6 @@ def get_tKE(filename,groupname):
     tKE=yt.YTArray.from_hdf5(filename, dataset_name="/%s/turbulent_kinetic_energy"%groupname).in_units('erg')
     return tKE
 
-def get_total_ME(filename,groupname):
+def get_ME(filename,groupname):
     ME=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_energy"%groupname).in_units('erg')
     return ME

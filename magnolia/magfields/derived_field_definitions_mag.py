@@ -1,4 +1,9 @@
-#%matplotlib inline
+"""
+A host of derived field definitions regarding magnetic energy,
+some taking into account the proportions of a certain fields due to
+either cluster 1 or 2.
+"""
+
 import yt
 
 def _magnetic_energy1(field, data):

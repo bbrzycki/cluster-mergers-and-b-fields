@@ -1,3 +1,9 @@
+"""
+A host of derived field definitions regarding different forms of energy,
+some taking into account the proportions of a certain fields due to
+either cluster 1 or 2.
+"""
+
 import yt
 from yt.units import kboltz, mp
 import os
@@ -104,9 +110,3 @@ def _particle_ener(field, data):
     return (ke+pe)*logic
 yt.add_field(('io', 'particle_ener'), function=_particle_ener, units='dimensionless',
              particle_type=True, force_override=True)
-
-# L is a YTArray
-def get_units(L):
-    temp_str = str(L[-1:])
-    k = temp_str.rfind(']') + 2
-    return temp_str[k:]
