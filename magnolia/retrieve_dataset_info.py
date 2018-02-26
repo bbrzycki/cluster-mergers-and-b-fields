@@ -15,7 +15,7 @@ def get_units(L):
 
 def get_groups(filename):
     f = h5py.File(filename,'r')
-    groups = f.keys()
+    groups = list(f.keys())
     f.close()
     return groups
 
@@ -25,7 +25,7 @@ def list_groups(filename):
 
 def get_fields(filename,groupname):
     f = h5py.File(filename,'r')
-    fields = f[groupname].keys()
+    fields = list(f[groupname].keys())
     f.close()
     return fields
 
