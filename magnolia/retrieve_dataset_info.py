@@ -97,13 +97,13 @@ def velocity_mean_squared(filename,groupname):
     return v_r_mean**2+v_t_mean**2+v_p_mean**2
 
 def mag_field_r_variance(filename,groupname):
-    B_r_stddev=m.yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_radius_stddev"%groupname)[a:]
+    B_r_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_radius_stddev"%groupname)[a:]
     return B_r_stddev**2
 
 # tangential
 def mag_field_t_variance(filename,groupname):
-    B_theta_stddev=m.yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_theta_stddev"%groupname)[a:]
-    B_phi_stddev=m.yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_phi_stddev"%groupname)[a:]
+    B_theta_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_theta_stddev"%groupname)[a:]
+    B_phi_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_phi_stddev"%groupname)[a:]
     return B_theta_stddev**2+B_phi_stddev**2
 
 # filename is HDF5 file, groupname is 0500_profiles
