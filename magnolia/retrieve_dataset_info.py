@@ -42,7 +42,7 @@ def remove_field(filename,groupname,field):
     f.close()
     return
 
-def list_groups(filename):
+def list_groupnames(filename):
     print(get_groupnames(filename))
     return
 
