@@ -1,4 +1,4 @@
-# cluster-mergers-and-b-fields
+# magnolia
 Quantify the impact of magnetic fields on the cores of galaxy cluster mergers by comparing both magnetized and unmagnetized hydrodynamic simulations.
 
 Basic structure of repository:
