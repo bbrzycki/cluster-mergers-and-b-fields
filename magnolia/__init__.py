@@ -23,7 +23,7 @@ from store_dataset_info import \
 from retrieve_dataset_info import \
     get_units, get_groupnames, get_fieldnames, \
     remove_group, remove_field, \
-    list_groups, list_fieldnames, list_all_fieldnames, \
+    list_groupnamess, list_fieldnames, list_all_fieldnames, \
     get_field, get_mean, get_stddev, \
     density, kT, velocity_r_variance, velocity_t_variance, \
     velocity_variance, velocity_mean_squared, \
