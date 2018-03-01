@@ -5,6 +5,7 @@ either cluster 1 or 2.
 """
 
 import yt
+import numpy as np
 
 def _magnetic_energy1(field, data):
     return 1.0/(8*np.pi) * data['magnetic_field_strength']**2 * data['clr1'] * data['cell_volume']
