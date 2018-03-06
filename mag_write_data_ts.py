@@ -23,8 +23,8 @@ if __name__ == '__main__':
         # time_series_0.15r_500_part_gpm
         # time_series_1.0r_500_part_gpm
         # time_series_0.15r_500_gpm1
-        hdf5_groupname_0 = 'time_series_0.15r_500_100part'
-        hdf5_groupname_1 = 'time_series_1.0r_500_100part'
+        hdf5_groupname_0 = 'time_series_0.15r_500_most_bound'
+        hdf5_groupname_1 = 'time_series_1.0r_500_most_bound'
 
         ds_header = 'fiducial_%s_mag_hdf5_plt_cnt_' % sim_name
         ds_full_paths = m.glob.glob(data_dir+'fid_mag/'+sim_name+'/'+ds_header+'0[0-9][0-9][05]')

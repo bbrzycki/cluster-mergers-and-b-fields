@@ -15,7 +15,7 @@ import numpy as np
 
 # center_method
 def find_center(ds,
-                center_method = '100part',
+                center_method = 'most_bound',
                 halo = 1):
     # Find the gravitational potential minimum
     print('Finding gravitational potential minimum')
@@ -63,7 +63,6 @@ def generate_profiles(ds,
                       R = 2000,
                       n_bins = 100,
                       center_method = 'gpot'):
-    print('Finding gravitational potential minimum')
     # Find the gravitational potential minimum
     c = find_center(ds, center_method)
 
@@ -125,7 +124,7 @@ def generate_energy_over_time(ts,
                               region = 'sphere',
                               r500_multiplier = 0.15,
                               r200 = 1550,
-                              center_method = '100part'):
+                              center_method = 'most_bound'):
     ts_data = {}
     ts_data['centers'] = []
     ts_data['time'] = []
@@ -217,7 +216,7 @@ def make_energy_over_time(ds_paths,
                           region = 'sphere',
                           r500_multiplier = 0.15,
                           r200 = 1550,
-                          center_method = 'gpot'):
+                          center_method = 'most_bound'):
     # try creating directory if it doesn't exist
     try:
         os.makedirs(hdf5_directory)
