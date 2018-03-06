@@ -135,6 +135,25 @@ def mag_field_squared_mean_phi(filename,groupname):
 def mag_field_squared_mean(filename,groupname):
     return (mag_field_variance(filename,groupname)+mag_field_mean_squared(filename,groupname))
 
+# similar methods using Cartesian, just to cross-reference
+# mean squared = squared mean + variance
+def mag_field_mean_squared_Cartesian(filename,groupname):
+    B_x_mean=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_x_mean"%groupname)
+    B_y_mean=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_y_mean"%groupname)
+    B_z_mean=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_z_mean"%groupname)
+    return B_x_mean**2+B_y_mean**2+B_z_mean**2
+
+# mean squared = squared mean + variance
+def mag_field_variance_Cartesian(filename,groupname):
+    B_x_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_x_stddev"%groupname)
+    B_y_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_y_stddev"%groupname)
+    B_z_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_z_stddev"%groupname)
+    return B_x_stddev**2+B_y_stddev**2+B_z_stddev**2
+
+def mag_field_squared_mean_Cartesian(filename,groupname):
+    return (mag_field_variance_Cartesian(filename,groupname)
+        + mag_field_mean_squared_Cartesian(filename,groupname))
+
 # sound speed sq
 def c_s_squared(filename,groupname):
     return gamma*kT(filename,groupname)/(mu*mp)

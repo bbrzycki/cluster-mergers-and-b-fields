@@ -32,14 +32,17 @@ if __name__ == '__main__':
             hdf5_groupname = 'profiles_0450_gpot_afterfix'
             ds_full_path = data_dir+'fid_mag/'+sim_name+'/'+ds_header+'0450'
 
-        field_list = ['kT',
-                      'density',
-                      'velocity_spherical_radius',
-                      'velocity_spherical_theta',
-                      'velocity_spherical_phi',
-                      'magnetic_field_spherical_radius',
-                      'magnetic_field_spherical_theta',
-                      'magnetic_field_spherical_phi']
+        # field_list = ['kT',
+        #               'density',
+        #               'velocity_spherical_radius',
+        #               'velocity_spherical_theta',
+        #               'velocity_spherical_phi',
+        #               'magnetic_field_spherical_radius',
+        #               'magnetic_field_spherical_theta',
+        #               'magnetic_field_spherical_phi']
+        field_list = ['magnetic_field_x',
+                      'magnetic_field_y',
+                      'magnetic_field_z']
 
         magnolia.make_profiles(ds_full_path,
                                field_list,
