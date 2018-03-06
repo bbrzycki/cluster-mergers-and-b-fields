@@ -25,10 +25,14 @@ from retrieve_dataset_info import \
     remove_group, remove_field, \
     list_groupnames, list_fieldnames, list_all_fieldnames, \
     get_field, get_mean, get_stddev, \
-    density, kT, velocity_r_variance, velocity_t_variance, \
+    density, kT, velocity_variance_radial, velocity_variance_tangential, \
     velocity_variance, velocity_mean_squared, \
-    mag_field_r_variance, mag_field_t_variance, mag_field_variance, \
-    mag_field_mean_squared, mag_field_squared_mean, \
+    mag_field_squared_mean_radius, mag_field_squared_mean_theta, \
+    mag_field_squared_mean_phi, mag_field_squared_mean, \
+    mag_field_variance_radial, mag_field_variance_tangential,
+    mag_field_variance, mag_field_mean_squared, \
+    mag_field_mean_squared_Cartesian, mag_field_variance_Cartesian, \
+    mag_field_squared_mean_Cartesian, \
     c_s_squared, v_A_squared, n_e, entropy, \
     get_mass, get_IE, get_KE, get_tKE, get_ME
 
