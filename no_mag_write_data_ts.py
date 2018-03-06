@@ -1,4 +1,5 @@
 import magnolia
+import glob
 
 if __name__ == '__main__':
 
@@ -26,7 +27,7 @@ if __name__ == '__main__':
         hdf5_groupname_1 = 'time_series_1.0r_500_most_bound'
 
         ds_header = 'fiducial_%s_hdf5_plt_cnt_' % sim_name
-        ds_full_paths = m.glob.glob(data_dir+'fid/'+sim_name+'/'+ds_header+'0[0-9][0-9][05]')
+        ds_full_paths = glob.glob(data_dir+'fid/'+sim_name+'/'+ds_header+'0[0-9][0-9][05]')
         ds_full_paths.sort()
 
         field_list = ['mass',
