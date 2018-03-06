@@ -82,12 +82,14 @@ def write_profiles_to_hdf5(filename,
                            profile,
                            field_list):
     # test if file exists
+    print('Writing profiles')
     f = h5py.File(filename, 'a')
     yt.YTArray.write_hdf5(profile.x,filename, dataset_name='/%s/radius' % groupname)
     for field in field_list:
         yt.YTArray.write_hdf5(profile[field],filename, dataset_name='/%s/%s_mean' % (groupname,field))
         yt.YTArray.write_hdf5(profile.standard_deviation['gas','%s'%field],filename, dataset_name='/%s/%s_stddev' % (groupname,field))
     f.close()
+    print('Finished writing profiles')
 
 # ds_path is the full path to the dataset file
 # hdf5_directory is desired directory name for HDF5 files
