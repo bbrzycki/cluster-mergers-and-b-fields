@@ -97,13 +97,13 @@ def velocity_mean_squared(filename,groupname):
     return v_radius_mean**2+v_theta_mean**2+v_phi_mean**2
 
 def mag_field_variance_radial(filename,groupname):
-    B_radius_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_radius_stddev"%groupname)[a:]
+    B_radius_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_radius_stddev"%groupname)
     return B_radius_stddev**2
 
 # tangential
 def mag_field_variance_tangential(filename,groupname):
-    B_theta_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_theta_stddev"%groupname)[a:]
-    B_phi_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_phi_stddev"%groupname)[a:]
+    B_theta_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_theta_stddev"%groupname)
+    B_phi_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_phi_stddev"%groupname)
     return B_theta_stddev**2+B_phi_stddev**2
 
 # filename is HDF5 file, groupname is 0500_profiles
@@ -118,18 +118,18 @@ def mag_field_mean_squared(filename,groupname):
     return B_radius_mean**2+B_theta_mean**2+B_phi_mean**2
 
 def mag_field_squared_mean_radius(filename,groupname):
-    B_radius_mean=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_radius_mean"%groupname)[a:]
-    B_radius_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_radius_stddev"%groupname)[a:]
+    B_radius_mean=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_radius_mean"%groupname)
+    B_radius_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_radius_stddev"%groupname)
     return B_radius_mean**2 + B_radius_stddev**2
 
 def mag_field_squared_mean_theta(filename,groupname):
-    B_theta_mean=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_theta_mean"%groupname)[a:]
-    B_theta_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_theta_stddev"%groupname)[a:]
+    B_theta_mean=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_theta_mean"%groupname)
+    B_theta_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_theta_stddev"%groupname)
     return B_theta_mean**2 + B_theta_stddev**2
 
 def mag_field_squared_mean_phi(filename,groupname):
-    B_phi_mean=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_phi_mean"%groupname)[a:]
-    B_phi_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_phi_stddev"%groupname)[a:]
+    B_phi_mean=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_phi_mean"%groupname)
+    B_phi_stddev=yt.YTArray.from_hdf5(filename, dataset_name="/%s/magnetic_field_spherical_phi_stddev"%groupname)
     return B_phi_mean**2 + B_phi_stddev**2
 
 def mag_field_squared_mean(filename,groupname):
