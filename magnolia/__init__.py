@@ -29,7 +29,7 @@ from retrieve_dataset_info import \
     velocity_variance, velocity_mean_squared, \
     mag_field_squared_mean_radius, mag_field_squared_mean_theta, \
     mag_field_squared_mean_phi, mag_field_squared_mean, \
-    mag_field_variance_radial, mag_field_variance_tangential,
+    mag_field_variance_radial, mag_field_variance_tangential, \
     mag_field_variance, mag_field_mean_squared, \
     mag_field_mean_squared_Cartesian, mag_field_variance_Cartesian, \
     mag_field_squared_mean_Cartesian, \
