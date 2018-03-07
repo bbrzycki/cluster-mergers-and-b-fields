@@ -1,6 +1,6 @@
 import magnolia
 import magnolia.magfields
-import glob
+import glob, os, errno
 import yt
 
 if __name__ == '__main__':
