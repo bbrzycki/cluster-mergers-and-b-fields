@@ -39,7 +39,7 @@ if __name__ == '__main__':
 
         for center_method in center_methods:
             try:
-                os.makedirs(img_dir+'/magnetic_field_strength_4Mpc/'+center_method)
+                os.makedirs(img_dir+'/'+sim_name+'/magnetic_field_strength_4Mpc/'+center_method)
             except OSError as e:
                 if e.errno != errno.EEXIST:
                     raise
@@ -61,6 +61,6 @@ if __name__ == '__main__':
                 slc.annotate_streamlines('magnetic_field_x', 'magnetic_field_y',
                                          factor=16, density = 5, field_color='magnetic_field_strength')
 
-                slc.save(img_dir+'/magnetic_field_strength_4Mpc/'+center_method)
+                slc.save(img_dir+'/'+sim_name+'/magnetic_field_strength_4Mpc/'+center_method)
                 print('%s %s saved' % (ds,center_method))
     print('Completed slice images')
