@@ -31,7 +31,7 @@ if __name__ == '__main__':
         ds_full_paths.sort()
 
         # Get a collection of datasets to iterate over
-        ts = yt.DatasetSeries(data_fns)
+        ts = yt.DatasetSeries(ds_full_paths)
         axis='z'
 
         ds_final = yt.load(ds_full_paths[-1])
