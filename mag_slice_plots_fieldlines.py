@@ -35,7 +35,7 @@ if __name__ == '__main__':
         axis='z'
 
         ds_final = yt.load(ds_full_paths[-1])
-        c_final = find_center(ds_final, center_method = 'gpot')
+        c_final = magnolia.find_center(ds_final, center_method = 'gpot')
 
         for center_method in center_methods:
             try:
@@ -49,7 +49,7 @@ if __name__ == '__main__':
                 if center_method == 'gpot_final':
                     c = c_final
                 else:
-                    c = find_center(ds, center_method = center_method)
+                    c = magnolia.find_center(ds, center_method = center_method)
 
                 slc = yt.SlicePlot(ds, axis, 'magnetic_field_strength', width = (4,'Mpc'), center = c)
 
