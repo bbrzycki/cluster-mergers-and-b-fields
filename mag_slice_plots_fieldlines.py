@@ -6,22 +6,23 @@ import yt
 if __name__ == '__main__':
 
     data_dir = '/data/mimir/jzuhone/data/'
-    img_dir = 'slice-plots'
+    img_dir = '/data/mimir/jzuhone/bryan/slice-plots'
 
     sim_names = ['1to1_b0',
+                 '1to3_b1',
                  '1to1_b0.5',
                  '1to1_b1',
                  '1to3_b0',
                  '1to3_b0.5',
-                 '1to3_b1',
                  '1to10_b0',
                  '1to10_b0.5',
                  '1to10_b1']
 
-    center_methods = ['gpot',
-                      'particle_gpot',
-                      'most_bound',
-                      'gpot_final']
+    # center_methods = ['gpot',
+    #                   'particle_gpot',
+    #                   'most_bound',
+    #                   'gpot_final']
+    center_methods = ['gpot_final']
 
     # do all time series
     for sim_name in sim_names:
@@ -39,7 +40,7 @@ if __name__ == '__main__':
 
         for center_method in center_methods:
             try:
-                os.makedirs(img_dir+'/'+sim_name+'/magnetic_field_strength_4Mpc/'+center_method)
+                os.makedirs(img_dir+'/'+sim_name+'/magnetic_field_lines_8Mpc/')
             except OSError as e:
                 if e.errno != errno.EEXIST:
                     raise
@@ -51,7 +52,7 @@ if __name__ == '__main__':
                 else:
                     c = magnolia.find_center(ds, center_method = center_method)
 
-                slc = yt.SlicePlot(ds, axis, 'magnetic_field_strength', width = (4,'Mpc'), center = c)
+                slc = yt.SlicePlot(ds, axis, 'magnetic_field_strength', width = (8,'Mpc'), center = c)
 
                 zlim1=1e-10
                 zlim2=1e-5
@@ -61,6 +62,6 @@ if __name__ == '__main__':
                 slc.annotate_streamlines('magnetic_field_x', 'magnetic_field_y',
                                          factor=16, density = 5, field_color='magnetic_field_strength')
 
-                slc.save(img_dir+'/'+sim_name+'/magnetic_field_strength_4Mpc/'+center_method)
+                slc.save(img_dir+'/'+sim_name+'/magnetic_field_lines_8Mpc/')
                 print('%s %s saved' % (ds,center_method))
     print('Completed slice images')
