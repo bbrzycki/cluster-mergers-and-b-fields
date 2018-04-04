@@ -147,6 +147,7 @@ def generate_energy_over_time(ts,
                 R = ds.quan(r500_multiplier * r500, 'kpc') # where r500 is the value taken from the ZuHone 2011 paper
                 sp = ds.sphere(c, R)
             elif region == 'full_box':
+                ts_data['time'].append(ds.current_time.in_units('Gyr'))
                 sp = ds.all_data()
             else:
                 sys.exit("Specified invalid region!")
