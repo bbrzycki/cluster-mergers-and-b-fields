@@ -111,28 +111,26 @@ DATA_DIR = '/data/mimir/jzuhone/data/'
 # ds_fn_head_no_mag='fiducial_%s_hdf5_plt_cnt_' % SIM_TYPE
 # ds_fn_head_mag='fiducial_%s_mag_hdf5_plt_cnt_' % SIM_TYPE
 
-sim_names_mag=['1to1_b0',
-               '1to1_b0.5',
-               '1to1_b1',
-               '1to3_b0',
-               '1to3_b0.5',
-               '1to3_b1',
-               '1to10_b0',
-               '1to10_b0.5',
-               '1to10_b1']
+# sim_names_mag=['1to1_b0',
+#                '1to1_b0.5',
+#                '1to1_b1',
+#                '1to3_b0',
+#                '1to3_b0.5',
+#                '1to3_b1',
+#                '1to10_b0',
+#                '1to10_b0.5',
+#                '1to10_b1']
+sim_names_mag=['1to10_b0']
 #sim_names_mag=['1to1_b0']
-slice_fields = ['density',
-                'kT',
-                'magnetic_field_strength',
-                'entropy']
+slice_fields = ['magnetic_field_strength']
 #slice_fields = ['entropy']
 
 # do all time series
 for sim_name in sim_names_mag:
-    IMG_DIR='data_products/mag/'+sim_name+'/'
+    IMG_DIR='/data/mimir/jzuhone/bryan/slice-plots/'+sim_name+'/'
 
     try:
-        os.makedirs(IMG_DIR+'slice_plots')
+        os.makedirs(IMG_DIR)
     except OSError as e:
         if e.errno != errno.EEXIST:
             raise
@@ -141,19 +139,19 @@ for sim_name in sim_names_mag:
     for field in slice_fields:
         try:
             #os.makedirs(IMG_DIR+'slice_plots/'+field+'_6Mpc_dybo')
-            os.makedirs(IMG_DIR+'full_slice_plots/'+field+'_8Mpc')
+            os.makedirs(IMG_DIR+field+'_8Mpc')
             #os.makedirs(IMG_DIR+'slice_plots/'+field)
         except OSError as e:
             if e.errno != errno.EEXIST:
                 raise
 
-    try:
-        #os.makedirs(IMG_DIR+'slice_plots/'+field+'_6Mpc_dybo')
-        os.makedirs(IMG_DIR+'full_slice_plots/'+'all_cic'+'_8Mpc')
-        #os.makedirs(IMG_DIR+'slice_plots/'+field)
-    except OSError as e:
-        if e.errno != errno.EEXIST:
-            raise
+    # try:
+    #     #os.makedirs(IMG_DIR+'slice_plots/'+field+'_6Mpc_dybo')
+    #     os.makedirs(IMG_DIR+'full_slice_plots/'+'all_cic'+'_8Mpc')
+    #     #os.makedirs(IMG_DIR+'slice_plots/'+field)
+    # except OSError as e:
+    #     if e.errno != errno.EEXIST:
+    #         raise
 
     ds_fn_head_mag='fiducial_%s_mag_hdf5_plt_cnt_' % sim_name
     full_path_header=DATA_DIR+'fid_mag/'+sim_name+'/'+ds_fn_head_mag
@@ -206,10 +204,10 @@ for sim_name in sim_names_mag:
                 #slc.save(IMG_DIR+'slice_plots/'+field)
                 print('%s %s saved' % (ds,field))
 
-        # for particle density
-        slc = yt.SlicePlot(ds, axis, [('deposit', 'all_cic')], width = (8,'Mpc'), center = c)
-        slc.annotate_timestamp(redshift=False,draw_inset_box=True)
-        slc.save(IMG_DIR+'full_slice_plots/'+'all_cic'+'_8Mpc')
-        print('%s %s saved' % (ds,field))
+        # # for particle density
+        # slc = yt.SlicePlot(ds, axis, [('deposit', 'all_cic')], width = (8,'Mpc'), center = c)
+        # slc.annotate_timestamp(redshift=False,draw_inset_box=True)
+        # slc.save(IMG_DIR+'full_slice_plots/'+'all_cic'+'_8Mpc')
+        # print('%s %s saved' % (ds,field))
 
     print('Ended slice images of entropy, density, kT, and magnetic field strength')
