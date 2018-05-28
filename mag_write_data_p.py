@@ -23,9 +23,12 @@ if __name__ == '__main__':
         # sample groupnames: profiles_0250, profiles_0250_gpot,
         # profiles_0250_gpot_afterfix, 'profiles_0250_80b'
         hdf5_groupname = 'profiles_0500_most_bound'
+        gpot_groupname_0000 = 'profiles_0000_gpot_afterfix'
+        mostbound_groupname_0000 = 'profiles_0000_most_bound'
 
         ds_header = 'fiducial_%s_mag_hdf5_plt_cnt_' % sim_name
         ds_full_path = data_dir+'fid_mag/'+sim_name+'/'+ds_header+'0500'
+        ds_full_path_0000 = data_dir+'fid_mag/'+sim_name+'/'+ds_header+'0000'
 
         # Simulation 1to3_b1 does not have timestep 0500, only 0450
         if sim_name == '1to3_b1':
@@ -50,3 +53,5 @@ if __name__ == '__main__':
                                hdf5_filename,
                                hdf5_groupname,
                                center_method = 'most_bound')
+        magnolia.make_profiles(ds_full_path_0000,field_list,hdf5_dir,hdf5_filename,gpot_groupname_0000,center_method='gpot')
+        magnolia.make_profiles(ds_full_path_0000,field_list,hdf5_dir,hdf5_filename,mostbound_groupname_0000,center_method='most_bound')
