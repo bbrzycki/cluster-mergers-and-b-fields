@@ -199,7 +199,6 @@ def write_energy_over_time_to_hdf5(filename,
                                    groupname,
                                    ts_data,
                                    field_list):
-    # text
     f = h5py.File(filename, 'a')
     for field in field_list:
         yt.YTArray.write_hdf5(yt.YTArray(ts_data[field]),filename, dataset_name='/%s/%s' % (groupname,field))

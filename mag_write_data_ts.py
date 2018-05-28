@@ -34,6 +34,7 @@ if __name__ == '__main__':
 
         field_list = ['mass',
                       'internal_energy',
+                      'turbulent_kinetic_energy',
                       'kinetic_energy',
                       'magnetic_energy']
 

@@ -32,6 +32,7 @@ if __name__ == '__main__':
 
         field_list = ['mass',
                       'internal_energy',
+                      'turbulent_kinetic_energy',
                       'kinetic_energy']
 
         magnolia.make_energy_over_time(ds_full_paths,
