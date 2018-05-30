@@ -3,7 +3,7 @@ import magnolia
 if __name__ == '__main__':
 
     data_dir = '/data/mimir/jzuhone/data/'
-    hdf5_dir = 'processed-data'
+    hdf5_dir = '../processed-data'
 
     sim_names = ['1to1_b0',
                  '1to1_b0.5',
