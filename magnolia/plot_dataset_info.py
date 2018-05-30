@@ -3,7 +3,7 @@ Series of functions to plot profile and energy over time data. Includes
 general functions to generate 3x1 or 3x3 paneled plots.
 
 Currently incomplete, since the annotations and labels for the plots that
-will appear in my thesis require a bit more finetuning. This will be done using
+will appear in analysis require finetuning. This will be done using
 Jupyter notebooks located within the repo.
 """
 

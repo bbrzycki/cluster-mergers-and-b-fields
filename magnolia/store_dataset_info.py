@@ -12,6 +12,7 @@ import errno
 import yt
 import h5py
 import numpy as np
+import time
 
 # center_method
 def find_center(ds,
@@ -63,6 +64,8 @@ def generate_profiles(ds,
                       R = 2000,
                       n_bins = 100,
                       center_method = 'gpot'):
+    start = time.time()
+
     # Find the gravitational potential minimum
     c = find_center(ds, center_method)
 
@@ -72,7 +75,8 @@ def generate_profiles(ds,
     print('Creating profiles')
     p = yt.create_profile(sp, 'radius', field_list, n_bins=n_bins)
 
-    print('Finished creating profiles')
+    end = time.time()
+    print('Finished creating profiles -- %f s' % (end-start))
     return p
 
 # write profile p with field_list to HDF5 file filename
@@ -127,6 +131,7 @@ def generate_energy_over_time(ts,
                               r500_multiplier = 0.15,
                               r200 = 1550,
                               center_method = 'most_bound'):
+    start = time.time()
     ts_data = {}
     ts_data['centers'] = []
     ts_data['time'] = []
@@ -184,14 +189,16 @@ def generate_energy_over_time(ts,
                     quan = sp.quantities.total_quantity([field+'_total'])
                     if field == 'kinetic_energy':
                         print('overall KE:',quan)
-
-                print('Saving...')
+                save_time = time.time()
+                print('Saving... -- %f s' % (save_time - start))
                 ts_data[field].append(quan)
 
         except Exception as error:
             f = open('error.txt','a')
             f.write('%s -- %s\n' % (ds, error))
             f.close()
+    end = time.time()
+    print('Finished calculating energy over time -- %f s' % (end - start))
     return ts_data
 
 # groupname = time_series
