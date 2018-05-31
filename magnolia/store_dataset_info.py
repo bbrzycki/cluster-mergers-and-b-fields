@@ -67,28 +67,30 @@ def generate_profiles(ds,
     start = time.time()
 
     # Find the gravitational potential minimum
-    c = find_center(ds, center_method)
+    center = find_center(ds, center_method)
 
     # Make a sphere at this point
     sp = ds.sphere(c, ds.quan(R, 'kpc'))
 
     print('Creating profiles')
-    p = yt.create_profile(sp, 'radius', field_list, n_bins=n_bins)
+    profile = yt.create_profile(sp, 'radius', field_list, n_bins=n_bins)
 
     end = time.time()
     print('Finished creating profiles -- %f s' % (end-start))
-    return p
+    return profile, center
 
 # write profile p with field_list to HDF5 file filename
 # groupname is 0500_profiles, 0000_profiles, etc
 def write_profiles_to_hdf5(filename,
                            groupname,
                            profile,
+                           center,
                            field_list):
     # test if file exists
     print('Writing profiles')
     f = h5py.File(filename, 'a')
     yt.YTArray.write_hdf5(profile.x,filename, dataset_name='/%s/radius' % groupname)
+    yt.YTArray.write_hdf5(center,filename, dataset_name='/%s/center' % groupname)
     for field in field_list:
         yt.YTArray.write_hdf5(profile[field],filename, dataset_name='/%s/%s_mean' % (groupname,field))
         yt.YTArray.write_hdf5(profile.standard_deviation['gas','%s'%field],filename, dataset_name='/%s/%s_stddev' % (groupname,field))
@@ -113,14 +115,15 @@ def make_profiles(ds_path,
         if e.errno != errno.EEXIST:
             raise
     ds = yt.load(ds_path)
-    profile = generate_profiles(ds,
-                                field_list,
-                                center_method = center_method,
-                                R = ds.quan(R, 'kpc'),
-                                n_bins = n_bins)
+    profile, center = generate_profiles(ds,
+                                        field_list,
+                                        center_method = center_method,
+                                        R = ds.quan(R, 'kpc'),
+                                        n_bins = n_bins)
     write_profiles_to_hdf5(hdf5_directory + '/' + hdf5_filename,
                            hdf5_groupname,
                            profile,
+                           center,
                            field_list)
 
 # r500_multiplier is 0.15 or 1.0, r200 in kpc
