@@ -70,7 +70,7 @@ def generate_profiles(ds,
     center = find_center(ds, center_method)
 
     # Make a sphere at this point
-    sp = ds.sphere(c, ds.quan(R, 'kpc'))
+    sp = ds.sphere(center, ds.quan(R, 'kpc'))
 
     print('Creating profiles')
     profile = yt.create_profile(sp, 'radius', field_list, n_bins=n_bins)
