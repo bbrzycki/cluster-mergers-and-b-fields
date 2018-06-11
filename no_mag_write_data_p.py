@@ -22,6 +22,7 @@ if __name__ == '__main__':
         # sample groupnames: profiles_0250, profiles_0250_gpot,
         # profiles_0250_gpot_afterfix, 'profiles_0250_80b'
         hdf5_groupname = 'profiles_0500_most_bound'
+        gpot_groupname = 'profiles_0500_gpot'
 
         ds_header = 'fiducial_%s_hdf5_plt_cnt_' % sim_name
         ds_full_path = data_dir+'fid/'+sim_name+'/'+ds_header+'0500'
@@ -38,3 +39,4 @@ if __name__ == '__main__':
                                hdf5_filename,
                                hdf5_groupname,
                                center_method = 'most_bound')
+        magnolia.make_profiles(ds_full_path, field_list, hdf5_dir, hdf5_filename, gpot_groupname, center_method = 'gpot')
