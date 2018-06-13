@@ -39,6 +39,6 @@ if __name__ == '__main__':
 
         for (field,ds_header,zlim1,zlim2,cmap,output_fn) in multiplot_info:
             print("Plotting epochs %s" % all_epochs[i])
-            ds_paths = [ds_header + epoch for epoch in all_epochs[i]]
+            ds_paths = [data_dir+'fid_mag/'+sim_name+'/'+ds_header+epoch for epoch in all_epochs[i]]
             magnolia.make_multiplot(field,ds_paths,zlim1,zlim2,cmap,output_fn)
             print("Saving plot %s" % output_fn)
