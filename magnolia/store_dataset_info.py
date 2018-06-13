@@ -180,6 +180,7 @@ def generate_energy_over_time(ts,
                     # at t = 0 it should be equal to zero (or close), especially for the 0.15*r500
                     # sphere
                     print('Calculating total %s -- %s' % ('turbulent_kinetic_energy',ds))
+                    print(region,field,field[-1],field[-1] in ['1','2'])
                     if region == 'full_box' and field[-1] in ['1','2']:
                         print('Calculating %s' % field[-1])
                         quan = sp.quantities.total_quantity(['kinetic_energy'+field[-1]])

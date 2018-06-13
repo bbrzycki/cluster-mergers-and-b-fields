@@ -33,9 +33,10 @@ if __name__ == '__main__':
         ds_full_paths = glob.glob(data_dir+'fid_mag/'+sim_name+'/'+ds_header+'0[0-9][0-9][05]')
         ds_full_paths.sort()
 
-        field_list = ['mass1',
+        field_list = [
+                        'turbulent_kinetic_energy1','mass1',
                       'internal_energy1',
-                      'turbulent_kinetic_energy1',
+
                       'kinetic_energy1',
                       'magnetic_energy1',
                       'mass2',
