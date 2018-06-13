@@ -52,7 +52,8 @@ def make_multiplot(field,ds_paths,zlim1,zlim2,cmap,output_fn):
         slc.set_cmap(field=field, cmap=cmap)
         if field == ('deposit', 'all_cic'):
             slc.set_log("all_cic", True)
-        slc.annotate_timestamp(redshift=False,draw_inset_box=True)
+        slc.annotate_timestamp(corner='upper_left',redshift=False,draw_inset_box=True)
+        slc.annotate_scale(corner='bottom_right')
 
         # This forces the SlicePlot to redraw itself on the AxesGrid axes.
         plot = slc.plots[field]
