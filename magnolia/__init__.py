@@ -36,4 +36,4 @@ from retrieve_dataset_info import \
     c_s_squared, v_A_squared, n_e, entropy, \
     get_mass, get_IE, get_KE, get_tKE, get_ME
 
-from plot_dataset_info import *
+from plot_dataset_info import make_multiplot

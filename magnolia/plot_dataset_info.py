@@ -24,25 +24,43 @@ mu = 0.588
 mu_e = 1.14
 gamma = 5/3
 
-# y_field is a YTArray
-def estimate_y_bounds(y_field):
-    min = 0
-    max = 0
-    print("Not yet implemented!")
-    return (min, max)
+def make_multiplot(field,ds_paths,zlim1,zlim2,cmap,output_fn):
 
-# plot 3x1 panel, 3 solid lines per panel
-def create_3x1_3lpp():
-    print("Not yet implemented!")
-    return
+    plt.close('all')
 
-# plot 3x1 panel, 3 solid lines and 3 dashed lines per panel
-def create_3x1_6lpp():
-    print("Not yet implemented!")
-    return
+    fig = plt.figure()
 
-# plot 3x3 panel, 3 solid lines and 2 dashed lines per panel
-# primarily reserved for energy over time plots
-def create_3x3_5lpp():
-    print("Not yet implemented!")
-    return
+    grid = AxesGrid(fig, (0.075,0.075,0.85,0.85),
+                    nrows_ncols = (2, 3),
+                    axes_pad = 0.05,
+                    label_mode = "1",
+                    share_all = True,
+                    cbar_location="right",
+                    cbar_mode="single",
+                    cbar_size="3%",
+                    cbar_pad="0%")
+
+    for i, fn in enumerate(fns):
+        # Load the data and create a single plot
+        ds = yt.load(fn) # load data
+        slc = yt.SlicePlot(ds, 'z', [field], width=(8,'Mpc'))
+
+        slc.set_font({'family':'dejavuserif', 'size':14})
+
+        slc.set_zlim(field, zlim1, zlim2)
+        slc.set_cmap(field=field, cmap=cmap)
+        if field == ('deposit', 'all_cic'):
+            slc.set_log("all_cic", True)
+        slc.annotate_timestamp(redshift=False,draw_inset_box=True)
+
+        # This forces the SlicePlot to redraw itself on the AxesGrid axes.
+        plot = slc.plots[field]
+        plot.figure = fig
+        plot.axes = grid[i].axes
+        plot.cax = grid.cbar_axes[i]
+
+        # Finally, this actually redraws the plot.
+        slc._setup_plots()
+
+    plt.gcf().subplots_adjust(right=0.15)
+    plt.savefig(output_fn, bbox_inches='tight')
