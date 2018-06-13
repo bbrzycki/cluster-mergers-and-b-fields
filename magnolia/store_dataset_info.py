@@ -180,21 +180,34 @@ def generate_energy_over_time(ts,
                     # at t = 0 it should be equal to zero (or close), especially for the 0.15*r500
                     # sphere
                     print('Calculating total %s -- %s' % ('turbulent_kinetic_energy',ds))
-                    quan=sp.quantities.total_quantity(['kinetic_energy'+'_total'])
-                    print('turbulent KE:',quan)
+                    if region == 'full_box' and field[-1] in ['1','2']:
+                        quan1=sp.quantities.total_quantity(['kinetic_energy'+'1'])
+                        quan2=sp.quantities.total_quantity(['kinetic_energy'+'2'])
+                    else:
+                        quan=sp.quantities.total_quantity(['kinetic_energy'+'_total'])
 
+
+                    print('turbulent KE:',quan)
                     # After you are done, you should set the bulk velocity back to zero
 
                     sp.set_field_parameter('bulk_velocity', ds.arr([0.0, 0.0, 0.0], 'code_length'))
 
                 else:
                     print('Calculating total %s -- %s' % (field,ds))
-                    quan = sp.quantities.total_quantity([field+'_total'])
+                    if region == 'full_box' and field[-1] in ['1','2']:
+                        quan1=sp.quantities.total_quantity([field+'1'])
+                        quan2=sp.quantities.total_quantity([field+'2'])
+                    else:
+                        quan = sp.quantities.total_quantity([field+'_total'])
                     if field == 'kinetic_energy':
                         print('overall KE:',quan)
+                        
                 save_time = time.time()
                 print('Saving... -- %f s' % (save_time - start))
                 ts_data[field].append(quan)
+                if region == 'full_box' and field[-1] in ['1','2']:
+                    ts_data[field+'1'].append(quan1)
+                    ts_data[field+'2'].append(quan2)
 
         except Exception as error:
             f = open('error.txt','a')
