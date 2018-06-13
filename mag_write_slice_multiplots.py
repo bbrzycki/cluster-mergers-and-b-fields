@@ -38,7 +38,7 @@ if __name__ == '__main__':
                           [('deposit','all_cic'),ds_header_part,1e-31,1e-25,'cubehelix',plot_dir+'/'+sim_name+'_all_cic_multiplot.pdf']]
 
         for (field,ds_header,zlim1,zlim2,cmap,output_fn) in multiplot_info:
-            print("Plotting epochs %s" % all_epochs[i])
+            print("Plotting epochs %s for field %s" % (all_epochs[i],field))
             ds_paths = [data_dir+'fid_mag/'+sim_name+'/'+ds_header+epoch for epoch in all_epochs[i]]
             magnolia.make_multiplot(field,ds_paths,zlim1,zlim2,cmap,output_fn)
             print("Saving plot %s" % output_fn)
