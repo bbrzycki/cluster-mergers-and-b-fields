@@ -181,6 +181,7 @@ def generate_energy_over_time(ts,
                     # sphere
                     print('Calculating total %s -- %s' % ('turbulent_kinetic_energy',ds))
                     if region == 'full_box' and field[-1] in ['1','2']:
+                        print('Calculating %s' % field[-1])
                         quan = sp.quantities.total_quantity(['kinetic_energy'+field[-1]])
                     else:
                         quan = sp.quantities.total_quantity(['kinetic_energy'+'_total'])
