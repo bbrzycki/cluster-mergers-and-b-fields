@@ -181,10 +181,9 @@ def generate_energy_over_time(ts,
                     # sphere
                     print('Calculating total %s -- %s' % ('turbulent_kinetic_energy',ds))
                     if region == 'full_box' and field[-1] in ['1','2']:
-                        quan1=sp.quantities.total_quantity(['kinetic_energy'+'1'])
-                        quan2=sp.quantities.total_quantity(['kinetic_energy'+'2'])
+                        quan = sp.quantities.total_quantity(['kinetic_energy'+field[-1]])
                     else:
-                        quan=sp.quantities.total_quantity(['kinetic_energy'+'_total'])
+                        quan = sp.quantities.total_quantity(['kinetic_energy'+'_total'])
 
 
                     print('turbulent KE:',quan)
@@ -195,8 +194,7 @@ def generate_energy_over_time(ts,
                 else:
                     print('Calculating total %s -- %s' % (field,ds))
                     if region == 'full_box' and field[-1] in ['1','2']:
-                        quan1=sp.quantities.total_quantity([field])
-                        quan2=sp.quantities.total_quantity([field])
+                        quan = sp.quantities.total_quantity([field])
                     else:
                         quan = sp.quantities.total_quantity([field+'_total'])
                     if field == 'kinetic_energy':
@@ -205,9 +203,6 @@ def generate_energy_over_time(ts,
                 save_time = time.time()
                 print('Saving... -- %f s' % (save_time - start))
                 ts_data[field].append(quan)
-                if region == 'full_box' and field[-1] in ['1','2']:
-                    ts_data[field].append(quan1)
-                    ts_data[field].append(quan2)
 
         except Exception as error:
             f = open('error.txt','a')
