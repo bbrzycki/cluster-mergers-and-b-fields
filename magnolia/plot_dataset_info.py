@@ -41,9 +41,9 @@ def make_multiplot(field,ds_paths,zlim1,zlim2,cmap,output_fn):
                     cbar_size="3%",
                     cbar_pad="0%")
 
-    for i, fn in enumerate(fns):
+    for i, path in enumerate(ds_paths):
         # Load the data and create a single plot
-        ds = yt.load(fn) # load data
+        ds = yt.load(path) # load data
         slc = yt.SlicePlot(ds, 'z', [field], width=(8,'Mpc'))
 
         slc.set_font({'family':'dejavuserif', 'size':14})
