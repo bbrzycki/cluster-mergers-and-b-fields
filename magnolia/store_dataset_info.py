@@ -161,7 +161,7 @@ def generate_energy_over_time(ts,
                 sys.exit("Specified invalid region!")
 
             for field in field_list:
-                if field == 'turbulent_kinetic_energy':
+                if 'turbulent_kinetic_energy' in field:
 
                     # Find the average velocity of the sphere
                     bvx = sp.mean('velocity_x')
