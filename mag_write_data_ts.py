@@ -33,11 +33,16 @@ if __name__ == '__main__':
         ds_full_paths = glob.glob(data_dir+'fid_mag/'+sim_name+'/'+ds_header+'0[0-9][0-9][05]')
         ds_full_paths.sort()
 
-        field_list = ['mass',
-                      'internal_energy',
-                      'turbulent_kinetic_energy',
-                      'kinetic_energy',
-                      'magnetic_energy']
+        field_list = ['mass1',
+                      'internal_energy1',
+                      'turbulent_kinetic_energy1',
+                      'kinetic_energy1',
+                      'magnetic_energy1',
+                      'mass2',
+                      'internal_energy2',
+                      'turbulent_kinetic_energy2',
+                      'kinetic_energy2',
+                      'magnetic_energy2']
 
         magnolia.make_energy_over_time(ds_full_paths,
                                        field_list,

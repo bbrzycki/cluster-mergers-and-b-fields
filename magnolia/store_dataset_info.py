@@ -195,19 +195,19 @@ def generate_energy_over_time(ts,
                 else:
                     print('Calculating total %s -- %s' % (field,ds))
                     if region == 'full_box' and field[-1] in ['1','2']:
-                        quan1=sp.quantities.total_quantity([field+'1'])
-                        quan2=sp.quantities.total_quantity([field+'2'])
+                        quan1=sp.quantities.total_quantity([field])
+                        quan2=sp.quantities.total_quantity([field])
                     else:
                         quan = sp.quantities.total_quantity([field+'_total'])
                     if field == 'kinetic_energy':
                         print('overall KE:',quan)
-                        
+
                 save_time = time.time()
                 print('Saving... -- %f s' % (save_time - start))
                 ts_data[field].append(quan)
                 if region == 'full_box' and field[-1] in ['1','2']:
-                    ts_data[field+'1'].append(quan1)
-                    ts_data[field+'2'].append(quan2)
+                    ts_data[field].append(quan1)
+                    ts_data[field].append(quan2)
 
         except Exception as error:
             f = open('error.txt','a')
