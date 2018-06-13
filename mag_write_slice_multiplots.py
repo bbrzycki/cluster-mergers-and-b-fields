@@ -1,5 +1,5 @@
 import magnolia
-import magnolia.magfields
+# import magnolia.magfields
 
 if __name__ == '__main__':
 
