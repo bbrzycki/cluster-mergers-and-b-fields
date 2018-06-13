@@ -1,4 +1,5 @@
 import magnolia
+import magnolia.derived_field_definitions
 import magnolia.magfields
 import glob, os, errno
 import yt

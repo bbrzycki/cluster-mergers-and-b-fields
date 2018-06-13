@@ -1,4 +1,5 @@
 import magnolia
+import magnolia.derived_field_definitions
 
 if __name__ == '__main__':
 
