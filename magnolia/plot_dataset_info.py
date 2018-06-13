@@ -14,6 +14,7 @@ import sys
 import glob
 import errno
 import matplotlib as mpl
+from mpl_toolkits.axes_grid1 import AxesGrid
 mpl.use('agg')
 import numpy as np
 import matplotlib.pyplot as plt
