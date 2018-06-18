@@ -203,6 +203,7 @@ def generate_energy_over_time(ts,
 
                 save_time = time.time()
                 print('Saving... -- %f s' % (save_time - start))
+                print(quan)
                 ts_data[field].append(quan)
 
         except Exception as error:
